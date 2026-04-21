@@ -23,6 +23,7 @@ const MODELS = [
     icon: "Sprout",
     features: ["2 двери + 2 форточки", "Краб-система на 4 болта", "Гарантия 15 лет"],
     popular: false,
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/dc3f1331-acca-41e6-8ffe-3d1626ac3bde.jpg",
   },
   {
     name: "Боярская Люкс 3м",
@@ -32,6 +33,7 @@ const MODELS = [
     icon: "TreePine",
     features: ["Труба 40×20 мм", "2 двери + 2 форточки", "Поликарбонат UV-400"],
     popular: true,
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/637dcd1a-b096-4535-af94-bdcf957b6212.jpg",
   },
   {
     name: "Боярская Делюкс 3м",
@@ -41,6 +43,7 @@ const MODELS = [
     icon: "Shield",
     features: ["Двойная труба", "Краб-система", "Гарантия 15 лет"],
     popular: false,
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/709af11a-6c42-40b5-be20-d6e09ffaacc1.jpg",
   },
   {
     name: "Дворцовая Люкс 3.5м",
@@ -50,6 +53,7 @@ const MODELS = [
     icon: "TreePine",
     features: ["Высота 2.8 м", "Труба 40×20 мм", "Отличная вентиляция"],
     popular: false,
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/df96bce6-4d30-4c7b-b90e-882b2d6ef595.jpg",
   },
   {
     name: "Стрелецкая Люкс 3м",
@@ -59,6 +63,7 @@ const MODELS = [
     icon: "Layers",
     features: ["Высота 2.4 м", "Труба 40×20 мм", "2 двери + 2 форточки"],
     popular: false,
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/ae67eee6-6bc9-4317-9198-083c8a2d3f5f.jpg",
   },
   {
     name: "Миттлайдер Премиум 3.5м",
@@ -68,6 +73,7 @@ const MODELS = [
     icon: "Warehouse",
     features: ["Двойная труба", "Идеальный микроклимат", "Равномерный прогрев"],
     popular: false,
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/93343083-6fb7-40b9-a989-474f3bde1355.jpg",
   },
 ];
 
@@ -93,22 +99,28 @@ const PROCESS_STEPS = [
 
 const REVIEWS = [
   {
-    name: "Наталья К.",
+    name: "Наталья Соколова",
     location: "Подмосковье",
-    text: "Заказала «Усадьбу» в прошлом году. Собрали за один день, всё аккуратно и без мусора. Огурцы и томаты уже с мая!",
+    model: "Боярская Люкс 3м",
+    text: "Заказала теплицу в марте, к маю уже была собрана. Ребята приехали вовремя, собрали за один день — аккуратно, без мусора. Огурцы и томаты уже с мая! Очень довольна покупкой.",
     rating: 5,
+    avatar: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/e3347290-8720-4e06-b32f-dbee381c94b0.jpg",
   },
   {
-    name: "Сергей М.",
+    name: "Сергей Михайлов",
     location: "Серпухов",
-    text: "Брал «Фермер» для зимнего выращивания зелени. Теплица держит тепло отлично, каркас не поведло даже при −35. Рекомендую.",
+    model: "Миттлайдер Премиум 3.5м",
+    text: "Брал для зимнего выращивания зелени. Теплица держит тепло отлично, каркас не поведло даже при −35. Двойная труба — это реально чувствуется. Всем рекомендую!",
     rating: 5,
+    avatar: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/8f2df94f-5b9c-440c-ad46-5ea1f2f7e3ff.jpg",
   },
   {
-    name: "Ирина В.",
+    name: "Ирина Воронова",
     location: "Дмитров",
-    text: "Очень внимательные менеджеры, помогли выбрать размер. Монтажники — молодцы, всё объяснили. Теплица стоит как влитая.",
+    model: "Дворцовая Люкс 3.5м",
+    text: "Очень внимательные менеджеры, помогли выбрать нужный размер. Высота 2.8 м — это просто мечта, работать внутри одно удовольствие. Монтажники — молодцы, всё объяснили и показали.",
     rating: 5,
+    avatar: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/e3d81dae-d6c7-403c-9506-2e5bb707bbfd.jpg",
   },
 ];
 
@@ -349,43 +361,49 @@ export default function Index() {
             {MODELS.map((m) => (
               <div
                 key={m.name}
-                className={`relative rounded-2xl border p-7 flex flex-col ${
+                className={`relative rounded-2xl border overflow-hidden flex flex-col ${
                   m.popular
-                    ? "border-moss bg-moss/5 shadow-lg"
+                    ? "border-moss shadow-lg"
                     : "border-sand bg-cream"
                 }`}
               >
                 {m.popular && (
-                  <span className="absolute -top-3 left-6 bg-moss text-cream text-xs px-3 py-1 rounded-full font-body font-medium">
+                  <span className="absolute top-3 left-3 z-10 bg-moss text-cream text-xs px-3 py-1 rounded-full font-body font-medium">
                     Популярная
                   </span>
                 )}
-                <div className="w-12 h-12 rounded-xl bg-moss/10 flex items-center justify-center mb-5">
-                  <Icon name={m.icon} size={24} className="text-moss" fallback="Leaf" />
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-                <h3 className="font-display text-2xl font-semibold text-bark mb-1">{m.name}</h3>
-                <p className="text-moss text-sm font-body mb-3">{m.size}</p>
-                <p className="text-foreground/65 text-sm font-body mb-5 flex-1">{m.desc}</p>
-                <ul className="space-y-2 mb-6">
-                  {m.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm font-body text-foreground/70">
-                      <Icon name="Check" size={14} className="text-moss flex-shrink-0" fallback="Check" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-2xl font-semibold text-bark">{m.price}</span>
-                  <a
-                    href="#contacts"
-                    className={`text-sm px-4 py-2 rounded-md font-body transition-colors ${
-                      m.popular
-                        ? "bg-moss text-cream hover:bg-leaf"
-                        : "border border-moss text-moss hover:bg-moss hover:text-cream"
-                    }`}
-                  >
-                    Заказать
-                  </a>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="font-display text-xl font-semibold text-bark mb-1">{m.name}</h3>
+                  <p className="text-moss text-xs font-body mb-3">{m.size}</p>
+                  <p className="text-foreground/65 text-sm font-body mb-4 flex-1">{m.desc}</p>
+                  <ul className="space-y-1.5 mb-5">
+                    {m.features.map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-sm font-body text-foreground/70">
+                        <Icon name="Check" size={13} className="text-moss flex-shrink-0" fallback="Check" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex items-center justify-between">
+                    <span className="font-display text-2xl font-semibold text-bark">{m.price}</span>
+                    <a
+                      href="#contacts"
+                      className={`text-sm px-4 py-2 rounded-md font-body transition-colors ${
+                        m.popular
+                          ? "bg-moss text-cream hover:bg-leaf"
+                          : "border border-moss text-moss hover:bg-moss hover:text-cream"
+                      }`}
+                    >
+                      Заказать
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -435,21 +453,30 @@ export default function Index() {
             {REVIEWS.map((r) => (
               <div
                 key={r.name}
-                className="rounded-2xl p-7 border border-sand"
+                className="rounded-2xl border border-sand overflow-hidden flex flex-col"
                 style={{ backgroundColor: "hsl(42,20%,93%)" }}
               >
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: r.rating }).map((_, i) => (
-                    <span key={i} className="text-amber-500 text-sm">★</span>
-                  ))}
-                </div>
-                <p className="text-foreground/75 font-body text-sm leading-relaxed mb-5 italic">
-                  «{r.text}»
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-moss/20 flex items-center justify-center">
-                    <Icon name="User" size={16} className="text-moss" fallback="User" />
+                <div className="px-7 pt-7 pb-5 flex-1">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: r.rating }).map((_, i) => (
+                        <span key={i} className="text-amber-500 text-sm">★</span>
+                      ))}
+                    </div>
+                    <span className="text-xs font-body text-moss bg-moss/10 px-2 py-1 rounded-full">
+                      {r.model}
+                    </span>
                   </div>
+                  <p className="text-foreground/75 font-body text-sm leading-relaxed italic">
+                    «{r.text}»
+                  </p>
+                </div>
+                <div className="flex items-center gap-3 px-7 py-4 border-t border-sand/60">
+                  <img
+                    src={r.avatar}
+                    alt={r.name}
+                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                  />
                   <div>
                     <p className="font-body font-medium text-bark text-sm">{r.name}</p>
                     <p className="text-foreground/50 text-xs font-body">{r.location}</p>
