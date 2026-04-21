@@ -217,7 +217,7 @@ export default function Index() {
   const openModal = () => { setModalOpen(true); setModalStep(1); setModalDone(false); setModalError(""); };
   const closeModal = () => setModalOpen(false);
 
-  const handleModalNext = () => {
+  const handleModalNext = async () => {
     setModalError("");
     if (modalStep === 1) {
       if (!mf.name.trim()) { setModalError("Пожалуйста, введите имя"); return; }
@@ -227,6 +227,15 @@ export default function Index() {
     if (modalStep < 4) {
       setModalStep(modalStep + 1);
     } else {
+      try {
+        await fetch("https://functions.poehali.dev/f31f9d9d-e2e5-4ff5-9591-dac6cb507aa7", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(mf),
+        });
+      } catch (e) {
+        console.error(e);
+      }
       setModalDone(true);
     }
   };
