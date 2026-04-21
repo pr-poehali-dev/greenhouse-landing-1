@@ -14,66 +14,70 @@ const NAV_LINKS = [
   { href: "#contacts", label: "Контакты" },
 ];
 
-const MODELS = [
+const CATEGORIES = [
   {
-    name: "Боярская 2.5м",
-    size: "2.5 × 4–12 м, высота 2.1 м",
-    price: "от 17 590 ₽",
-    desc: "Арочная теплица начального уровня. Оцинкованная труба 20×20 мм, снеговая нагрузка до 227 кг/м².",
-    icon: "Sprout",
-    features: ["2 двери + 2 форточки", "Краб-система на 4 болта", "Гарантия 15 лет"],
-    popular: false,
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/dc3f1331-acca-41e6-8ffe-3d1626ac3bde.jpg",
+    id: "arch",
+    label: "Арочные",
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/5df3b6b7-89c0-402b-81b8-1e5027074506.jpg",
+    desc: "Классическая форма дуги обеспечивает хорошее снегосбрасывание и оптимальное освещение. Самый популярный тип теплицы.",
+    models: [
+      { name: "Боярская 2.5м", size: "2.5 × 4–12 м, высота 2.1 м", price: "от 17 590 ₽", features: ["Труба 20×20 мм", "2 двери + 2 форточки", "Снег до 227 кг/м²"], popular: false },
+      { name: "Боярская Люкс 3м", size: "3 × 4–12 м, высота 2.1 м", price: "от 17 990 ₽", features: ["Труба 40×20 мм", "Поликарбонат UV-400", "Гарантия 15 лет"], popular: true },
+      { name: "Боярская Делюкс 3м", size: "3 × 4–12 м, высота 2.1 м", price: "от 25 990 ₽", features: ["Двойная труба", "Краб-система", "Гарантия 15 лет"], popular: false },
+      { name: "Дворцовая Люкс 3.5м", size: "3.5 × 4–12 м, высота 2.8 м", price: "от 45 990 ₽", features: ["Высота 2.8 м", "Труба 40×20 мм", "Для высокорослых культур"], popular: false },
+    ],
   },
   {
-    name: "Боярская Люкс 3м",
-    size: "3 × 4–12 м, высота 2.1 м",
-    price: "от 17 990 ₽",
-    desc: "Арочная теплица с усиленным каркасом из трубы 40×20 мм. Оцинковка внутри и снаружи.",
-    icon: "TreePine",
-    features: ["Труба 40×20 мм", "2 двери + 2 форточки", "Поликарбонат UV-400"],
-    popular: true,
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/637dcd1a-b096-4535-af94-bdcf957b6212.jpg",
+    id: "straight",
+    label: "Прямостенные",
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/2f85b504-b276-4324-8d6e-b5a77154baf2.jpg",
+    desc: "Вертикальные стены дают максимум пространства у боковых грядок. Удобнее работать у краёв, легче подвешивать шпалеры.",
+    models: [
+      { name: "Царская Люкс 2.5м", size: "2.5 × 4–12 м, высота 2.1 м", price: "от 27 990 ₽", features: ["Труба 40×20 мм", "Прямые стены", "Гарантия 15 лет"], popular: false },
+      { name: "Боярская Премиум 3м", size: "3 × 4–12 м, высота 2.1 м", price: "от 28 990 ₽", features: ["Двойная труба", "Краб-система", "Максимум пространства"], popular: true },
+      { name: "Царская Премиум 4м", size: "4 × 4–12 м, высота 2.8 м", price: "от 62 990 ₽", features: ["Ширина 4 м", "Двойная труба 40×20", "Профессиональная"], popular: false },
+    ],
   },
   {
-    name: "Боярская Делюкс 3м",
-    size: "3 × 4–12 м, высота 2.1 м",
-    price: "от 25 990 ₽",
-    desc: "Двойная труба 20×20 + 20×20 мм — повышенная прочность конструкции для любых условий.",
-    icon: "Shield",
-    features: ["Двойная труба", "Краб-система", "Гарантия 15 лет"],
-    popular: false,
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/709af11a-6c42-40b5-be20-d6e09ffaacc1.jpg",
+    id: "drop",
+    label: "Каплевидные",
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/8a861dff-3446-4854-bc7c-416e63db16e3.jpg",
+    desc: "Заострённый верх в форме капли — снег не задерживается вовсе. Отличная вентиляция и эстетичный вид на участке.",
+    models: [
+      { name: "Боярская Капля 3м", size: "3 × 4–12 м, высота 2.1 м", price: "от 20 990 ₽", features: ["Снег сходит сам", "Труба 20×20 мм", "Гарантия 15 лет"], popular: false },
+      { name: "Дворцовая Капля 3.5м", size: "3.5 × 4–12 м, высота 2.5 м", price: "от 38 990 ₽", features: ["Труба 40×20 мм", "Отличная вентиляция", "Эстетичный вид"], popular: true },
+    ],
   },
   {
-    name: "Дворцовая Люкс 3.5м",
-    size: "3.5 × 4–12 м, высота 2.8 м",
-    price: "от 45 990 ₽",
-    desc: "Арочная теплица с максимальной высотой 2.8 м. Идеальна для высокорослых культур.",
-    icon: "TreePine",
-    features: ["Высота 2.8 м", "Труба 40×20 мм", "Отличная вентиляция"],
-    popular: false,
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/df96bce6-4d30-4c7b-b90e-882b2d6ef595.jpg",
+    id: "gable",
+    label: "Двускатные",
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/67e62ce0-54c0-47b3-a873-68d97b019f70.jpg",
+    desc: "Двускатная крыша как у классического домика. Равномерный прогрев, хорошее освещение, снег легко сходит с двух сторон.",
+    models: [
+      { name: "Домик Люкс 3м", size: "3 × 4–12 м, высота 2.4 м", price: "от 32 990 ₽", features: ["Двускатная крыша", "Труба 40×20 мм", "Равномерный прогрев"], popular: true },
+      { name: "Домик Премиум 3.5м", size: "3.5 × 4–12 м, высота 2.6 м", price: "от 49 990 ₽", features: ["Двойная труба", "Высота 2.6 м", "Гарантия 15 лет"], popular: false },
+    ],
   },
   {
-    name: "Стрелецкая Люкс 3м",
-    size: "3 × 4–12 м, высота 2.4 м",
-    price: "от 20 990 ₽",
-    desc: "Арочная теплица с увеличенной высотой 2.4 м. Просторно и удобно при работе внутри.",
-    icon: "Layers",
-    features: ["Высота 2.4 м", "Труба 40×20 мм", "2 двери + 2 форточки"],
-    popular: false,
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/ae67eee6-6bc9-4317-9198-083c8a2d3f5f.jpg",
+    id: "mittlider",
+    label: "По Миттлайдеру",
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/3d12755a-2682-4b5c-82e3-b4f1004d6764.jpg",
+    desc: "Особая система вентиляции в коньке крыши. Идеальный микроклимат, равномерный прогрев воздуха — урожай на 20–30% выше.",
+    models: [
+      { name: "Миттлайдер Люкс 3.5м", size: "3.5 × 4–12 м, высота 2.4 м", price: "от 49 990 ₽", features: ["Вентиляция в коньке", "Труба 40×20 мм", "Идеальный климат"], popular: false },
+      { name: "Миттлайдер Премиум 3м", size: "3 × 4–12 м, высота 2.4 м", price: "от 69 990 ₽", features: ["Двойная труба", "Равномерный прогрев", "Гарантия 15 лет"], popular: true },
+      { name: "Миттлайдер Премиум 3.5м", size: "3.5 × 4–12 м, высота 2.4 м", price: "от 60 990 ₽", features: ["Двойная труба 40×20", "Оптимальный микроклимат", "Профессиональная"], popular: false },
+    ],
   },
   {
-    name: "Миттлайдер Премиум 3.5м",
-    size: "3.5 × 4–12 м, высота 2.4 м",
-    price: "от 60 990 ₽",
-    desc: "Прямостенная теплица с двойной трубой 40×20 + 20×20 мм. Оптимальная циркуляция воздуха.",
-    icon: "Warehouse",
-    features: ["Двойная труба", "Идеальный микроклимат", "Равномерный прогрев"],
-    popular: false,
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/93343083-6fb7-40b9-a989-474f3bde1355.jpg",
+    id: "lean",
+    label: "Пристенные",
+    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/93c544e3-8d27-4857-8da8-abd595becc69.jpg",
+    desc: "Крепятся к стене дома или забора. Экономят место на участке, используют тепло дома — идеальны для небольших участков.",
+    models: [
+      { name: "Пристенная Люкс 2.5м", size: "2.5 × 2–8 м, высота 2.5 м", price: "от 22 990 ₽", features: ["Крепление к стене", "Труба 40×20 мм", "Экономия места"], popular: false },
+      { name: "Пристенная Премиум 3м", size: "3 × 2–8 м, высота 2.8 м", price: "от 35 990 ₽", features: ["Двойная труба", "Высота 2.8 м", "Гарантия 15 лет"], popular: true },
+    ],
   },
 ];
 
@@ -195,6 +199,7 @@ export default function Index() {
     priorities: [] as string[],
   });
   const [submitted, setSubmitted] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("arch");
 
   // Modal state
   const [modalOpen, setModalOpen] = useState(false);
@@ -406,64 +411,91 @@ export default function Index() {
       {/* MODELS */}
       <section id="models" className="py-24 bg-cream">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10">
             <span className="text-moss text-sm tracking-widest uppercase font-body">Каталог</span>
-            <h2 className="font-display text-4xl md:text-5xl font-light mt-3 text-bark">Популярные модели теплиц</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-light mt-3 text-bark">Модели теплиц</h2>
             <p className="text-foreground/60 mt-3 font-body">
               Стандартные размеры в наличии. Нестандартные — под заказ.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {MODELS.map((m) => (
-              <div
-                key={m.name}
-                className={`relative rounded-2xl border overflow-hidden flex flex-col ${
-                  m.popular
-                    ? "border-moss shadow-lg"
-                    : "border-sand bg-cream"
+
+          {/* Category tabs */}
+          <div className="flex flex-wrap gap-2 justify-center mb-10">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-4 py-2 rounded-full text-sm font-body transition-colors border ${
+                  activeCategory === cat.id
+                    ? "bg-moss text-cream border-moss"
+                    : "bg-cream text-foreground/65 border-sand hover:border-sage"
                 }`}
               >
-                {m.popular && (
-                  <span className="absolute top-3 left-3 z-10 bg-moss text-cream text-xs px-3 py-1 rounded-full font-body font-medium">
-                    Популярная
-                  </span>
-                )}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={m.img}
-                    alt={m.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="font-display text-xl font-semibold text-bark mb-1">{m.name}</h3>
-                  <p className="text-moss text-xs font-body mb-3">{m.size}</p>
-                  <p className="text-foreground/65 text-sm font-body mb-4 flex-1">{m.desc}</p>
-                  <ul className="space-y-1.5 mb-5">
-                    {m.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-sm font-body text-foreground/70">
-                        <Icon name="Check" size={13} className="text-moss flex-shrink-0" fallback="Check" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex items-center justify-between">
-                    <span className="font-display text-2xl font-semibold text-bark">{m.price}</span>
-                    <a
-                      href="#contacts"
-                      className={`text-sm px-4 py-2 rounded-md font-body transition-colors ${
-                        m.popular
-                          ? "bg-moss text-cream hover:bg-leaf"
-                          : "border border-moss text-moss hover:bg-moss hover:text-cream"
-                      }`}
-                    >
-                      Заказать
-                    </a>
-                  </div>
-                </div>
-              </div>
+                {cat.label}
+              </button>
             ))}
           </div>
+
+          {/* Active category */}
+          {CATEGORIES.filter((c) => c.id === activeCategory).map((cat) => (
+            <div key={cat.id}>
+              {/* Category hero */}
+              <div className="grid md:grid-cols-2 gap-8 mb-10 rounded-2xl overflow-hidden border border-sand">
+                <img
+                  src={cat.img}
+                  alt={cat.label}
+                  className="w-full h-56 md:h-72 object-cover"
+                />
+                <div className="p-8 flex flex-col justify-center">
+                  <h3 className="font-display text-3xl font-semibold text-bark mb-3">{cat.label} теплицы</h3>
+                  <p className="text-foreground/65 font-body leading-relaxed">{cat.desc}</p>
+                </div>
+              </div>
+
+              {/* Models grid */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {cat.models.map((m) => (
+                  <div
+                    key={m.name}
+                    className={`relative rounded-xl border overflow-hidden flex flex-col ${
+                      m.popular ? "border-moss shadow-md" : "border-sand bg-cream"
+                    }`}
+                  >
+                    {m.popular && (
+                      <span className="absolute top-3 left-3 z-10 bg-moss text-cream text-xs px-3 py-1 rounded-full font-body font-medium">
+                        Популярная
+                      </span>
+                    )}
+                    <div className="p-5 flex flex-col flex-1">
+                      <h3 className="font-display text-lg font-semibold text-bark mb-1">{m.name}</h3>
+                      <p className="text-moss text-xs font-body mb-3">{m.size}</p>
+                      <ul className="space-y-1.5 mb-4 flex-1">
+                        {m.features.map((f) => (
+                          <li key={f} className="flex items-center gap-2 text-sm font-body text-foreground/70">
+                            <Icon name="Check" size={13} className="text-moss flex-shrink-0" fallback="Check" />
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="flex items-center justify-between pt-3 border-t border-sand">
+                        <span className="font-display text-xl font-semibold text-bark">{m.price}</span>
+                        <button
+                          onClick={openModal}
+                          className={`text-sm px-4 py-2 rounded-md font-body transition-colors ${
+                            m.popular
+                              ? "bg-moss text-cream hover:bg-leaf"
+                              : "border border-moss text-moss hover:bg-moss hover:text-cream"
+                          }`}
+                        >
+                          Заказать
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -559,7 +591,6 @@ export default function Index() {
             <div className="space-y-4 mb-10">
               {[
                 { icon: "Phone", text: "+7 (800) 000-00-00", sub: "Бесплатно по России" },
-                { icon: "Mail", text: "info@ecoteplitsa.ru", sub: "Отвечаем в течение часа" },
                 { icon: "MapPin", text: "Москва и Московская область", sub: "Выезжаем к вам" },
               ].map((c) => (
                 <div key={c.text} className="flex items-start gap-4">
