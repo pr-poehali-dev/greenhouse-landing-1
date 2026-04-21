@@ -259,9 +259,7 @@ export default function Index() {
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-sand">
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-          <a href="#" className="font-display text-2xl font-semibold text-moss tracking-wide">
-            ЭкоТеплица
-          </a>
+          <a href="#" className="font-display text-2xl font-semibold text-moss tracking-wide">Солнечный контур</a>
           <div className="hidden md:flex items-center gap-6">
             {NAV_LINKS.map((l) => (
               <a
