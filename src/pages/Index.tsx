@@ -894,7 +894,7 @@ export default function Index() {
       {/* FOOTER */}
       <footer className="bg-bark text-cream/70 py-10">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="font-display text-xl text-cream">ЭкоТеплица</span>
+          <span className="font-display text-xl text-cream"></span>
           <div className="flex gap-6 text-sm font-body">
             {NAV_LINKS.slice(0, 4).map((l) => (
               <a key={l.href} href={l.href} className="hover:text-cream transition-colors">
@@ -902,7 +902,7 @@ export default function Index() {
               </a>
             ))}
           </div>
-          <p className="text-xs font-body">© 2024 ЭкоТеплица. Все права защищены.</p>
+          <p className="text-xs font-body"></p>
         </div>
       </footer>
     </div>
