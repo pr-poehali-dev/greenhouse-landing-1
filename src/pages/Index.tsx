@@ -156,6 +156,34 @@ const PRIORITIES = [
   "Долговечность",
 ];
 
+const ARTICLES = [
+  "Тепличный бизнес: что выгодно выращивать в теплицах из поликарбоната",
+  "Как выбрать теплицу из поликарбоната: советы по покупке от специалистов",
+  "Организация правильного полива в теплице: какая вода нужна растениям",
+];
+
+const BUDGET_OPTIONS = [
+  "до 20 000 ₽",
+  "20 000 – 40 000 ₽",
+  "40 000 – 70 000 ₽",
+  "от 70 000 ₽",
+  "Готов рассмотреть предложение",
+];
+
+const INSTALL_OPTIONS = ["Самостоятельно", "Силами компании"];
+
+type ModalForm = {
+  name: string;
+  phone: string;
+  email: string;
+  length: string;
+  width: string;
+  height: string;
+  region: string;
+  install: string;
+  budget: string;
+};
+
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -167,6 +195,20 @@ export default function Index() {
     priorities: [] as string[],
   });
   const [submitted, setSubmitted] = useState(false);
+
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalStep, setModalStep] = useState(1);
+  const [modalDone, setModalDone] = useState(false);
+  const [mf, setMf] = useState<ModalForm>({
+    name: "", phone: "", email: "",
+    length: "", width: "", height: "",
+    region: "", install: "",
+    budget: "",
+  });
+
+  const openModal = () => { setModalOpen(true); setModalStep(1); setModalDone(false); };
+  const closeModal = () => setModalOpen(false);
 
   const togglePriority = (p: string) => {
     setForm((f) => ({
@@ -486,6 +528,159 @@ export default function Index() {
         </div>
       </section>
 
+      {/* CONTACTS / FORM */}
+      <section id="contacts" className="py-24 bg-cream">
+        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-start">
+          {/* Left: contacts */}
+          <div>
+            <span className="text-moss text-sm tracking-widest uppercase font-body">Контакты</span>
+            <h2 className="font-display text-4xl md:text-5xl font-light mt-3 mb-5 text-bark">
+              Оставьте заявку —<br />
+              <em className="italic">перезвоним за час</em>
+            </h2>
+            <p className="text-foreground/65 font-body mb-8">
+              Подберём модель, рассчитаем стоимость, ответим на все вопросы. Бесплатно и без обязательств.
+            </p>
+            <div className="space-y-4 mb-10">
+              {[
+                { icon: "Phone", text: "+7 (800) 000-00-00", sub: "Бесплатно по России" },
+                { icon: "Mail", text: "info@ecoteplitsa.ru", sub: "Отвечаем в течение часа" },
+                { icon: "MapPin", text: "Москва и Московская область", sub: "Выезжаем к вам" },
+              ].map((c) => (
+                <div key={c.text} className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-moss/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon name={c.icon} size={18} className="text-moss" fallback="Phone" />
+                  </div>
+                  <div>
+                    <p className="font-body font-medium text-bark">{c.text}</p>
+                    <p className="text-foreground/55 text-xs font-body">{c.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA кнопки */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+              <button
+                onClick={openModal}
+                className="flex-1 bg-moss text-cream px-6 py-3 rounded-md font-body font-medium hover:bg-leaf transition-colors text-sm text-center"
+              >
+                Оставить заявку
+              </button>
+              <button
+                onClick={openModal}
+                className="flex-1 border border-moss text-moss px-6 py-3 rounded-md font-body font-medium hover:bg-moss hover:text-cream transition-colors text-sm text-center"
+              >
+                Получить авторские статьи
+              </button>
+            </div>
+
+            {/* Список статей */}
+            <div className="rounded-xl border border-sand p-5" style={{ backgroundColor: "hsl(42,20%,93%)" }}>
+              <p className="text-xs font-body font-medium text-bark/60 uppercase tracking-wide mb-3">
+                Авторские статьи в подарок
+              </p>
+              <ul className="space-y-2.5">
+                {ARTICLES.map((a, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-moss/15 text-moss text-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-body font-medium">
+                      {i + 1}
+                    </span>
+                    <span className="text-sm font-body text-foreground/75 leading-snug">{a}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Right: simple quick form */}
+          <div
+            className="rounded-2xl border border-sand p-8"
+            style={{ backgroundColor: "hsl(42,20%,93%)" }}
+          >
+            {submitted ? (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-moss/15 rounded-full flex items-center justify-center mx-auto mb-5">
+                  <Icon name="CheckCircle" size={32} className="text-moss" fallback="CheckCircle" />
+                </div>
+                <h3 className="font-display text-2xl font-semibold text-bark mb-3">Заявка принята!</h3>
+                <p className="text-foreground/65 font-body">
+                  Мы перезвоним вам в течение часа в рабочее время.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <h3 className="font-display text-2xl font-semibold text-bark mb-1">Быстрая заявка</h3>
+                <p className="text-foreground/55 text-sm font-body mb-4">Оставьте контакты — перезвоним и подберём теплицу</p>
+                <div>
+                  <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">Имя *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Иван Петров"
+                    className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">Телефон *</label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="+7 (___) ___-__-__"
+                    className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">Email</label>
+                  <input
+                    type="email"
+                    placeholder="ivan@mail.ru"
+                    className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-body font-medium text-bark/70 mb-2 uppercase tracking-wide">
+                    Что важно?{" "}
+                    <span className="normal-case text-foreground/40">(несколько)</span>
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {PRIORITIES.map((p) => (
+                      <button
+                        type="button"
+                        key={p}
+                        onClick={() => togglePriority(p)}
+                        className={`text-xs font-body px-3 py-1.5 rounded-full border transition-colors ${
+                          form.priorities.includes(p)
+                            ? "bg-moss text-cream border-moss"
+                            : "bg-cream text-foreground/65 border-sand hover:border-sage"
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-moss text-cream py-3 rounded-md font-body font-medium hover:bg-leaf transition-colors"
+                >
+                  Отправить заявку
+                </button>
+                <p className="text-center text-xs text-foreground/40 font-body">
+                  Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+                </p>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section id="faq" className="py-24" style={{ backgroundColor: "hsl(42,20%,92%)" }}>
         <div className="max-w-3xl mx-auto px-4">
@@ -521,145 +716,212 @@ export default function Index() {
         </div>
       </section>
 
-      {/* CONTACTS / FORM */}
-      <section id="contacts" className="py-24 bg-cream">
-        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-start">
-          <div>
-            <span className="text-moss text-sm tracking-widest uppercase font-body">Заявка</span>
-            <h2 className="font-display text-4xl md:text-5xl font-light mt-3 mb-5 text-bark">
-              Оставьте заявку —<br />
-              <em className="italic">перезвоним за час</em>
-            </h2>
-            <p className="text-foreground/65 font-body mb-8">
-              Подберём модель, рассчитаем стоимость, ответим на все вопросы. Бесплатно и без обязательств.
-            </p>
-            <div className="space-y-5">
-              {[
-                { icon: "Phone", text: "+7 (800) 000-00-00", sub: "Бесплатно по России" },
-                { icon: "Mail", text: "info@ecoteplitsa.ru", sub: "Отвечаем в течение часа" },
-                { icon: "MapPin", text: "Москва и Московская область", sub: "Выезжаем к вам" },
-              ].map((c) => (
-                <div key={c.text} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-moss/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Icon name={c.icon} size={18} className="text-moss" fallback="Phone" />
-                  </div>
-                  <div>
-                    <p className="font-body font-medium text-bark">{c.text}</p>
-                    <p className="text-foreground/55 text-xs font-body">{c.sub}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* MODAL */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-bark/60 backdrop-blur-sm" onClick={closeModal} />
+          <div className="relative bg-cream rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+            {/* Progress bar */}
+            {!modalDone && (
+              <div className="h-1 bg-sand">
+                <div
+                  className="h-1 bg-moss transition-all duration-500"
+                  style={{ width: `${(modalStep / 4) * 100}%` }}
+                />
+              </div>
+            )}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-sand/60 flex items-center justify-center hover:bg-sand transition-colors"
+            >
+              <Icon name="X" size={16} className="text-bark" fallback="X" />
+            </button>
 
-          <div
-            className="rounded-2xl border border-sand p-8"
-            style={{ backgroundColor: "hsl(42,20%,93%)" }}
-          >
-            {submitted ? (
-              <div className="text-center py-12">
+            {modalDone ? (
+              <div className="p-8 text-center">
                 <div className="w-16 h-16 bg-moss/15 rounded-full flex items-center justify-center mx-auto mb-5">
                   <Icon name="CheckCircle" size={32} className="text-moss" fallback="CheckCircle" />
                 </div>
-                <h3 className="font-display text-2xl font-semibold text-bark mb-3">Заявка принята!</h3>
-                <p className="text-foreground/65 font-body">
-                  Мы перезвоним вам в течение часа в рабочее время.
-                </p>
+                <h3 className="font-display text-2xl font-semibold text-bark mb-3">Спасибо!</h3>
+                <p className="text-foreground/65 font-body text-sm mb-2">Заявка принята. Перезвоним в течение часа.</p>
+                <p className="text-foreground/65 font-body text-sm">Статьи отправим на указанный email.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">
-                      Имя *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Иван Петров"
-                      className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">
-                      Телефон *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="+7 (___) ___-__-__"
-                      className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="ivan@mail.ru"
-                    className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">
-                    Модель теплицы
-                  </label>
-                  <select
-                    className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground focus:outline-none focus:border-moss transition-colors"
-                    value={form.model}
-                    onChange={(e) => setForm({ ...form, model: e.target.value })}
+              <div className="p-8">
+                {/* Step indicator */}
+                <p className="text-xs font-body text-moss uppercase tracking-widest mb-2">Шаг {modalStep} из 4</p>
+
+                {modalStep === 1 && (
+                  <>
+                    <h3 className="font-display text-2xl font-semibold text-bark mb-1">
+                      Ответьте на 4 вопроса
+                    </h3>
+                    <p className="text-foreground/60 font-body text-sm mb-6">
+                      и получите 3 авторские статьи в подарок
+                    </p>
+                    {/* Articles preview */}
+                    <div className="rounded-xl border border-sand p-4 mb-6" style={{ backgroundColor: "hsl(42,20%,93%)" }}>
+                      {ARTICLES.map((a, i) => (
+                        <div key={i} className="flex items-start gap-2 mb-2 last:mb-0">
+                          <Icon name="BookOpen" size={14} className="text-moss flex-shrink-0 mt-0.5" fallback="BookOpen" />
+                          <span className="text-xs font-body text-foreground/70 leading-snug">{a}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <label className="block text-xs font-body font-medium text-bark/70 mb-1 uppercase tracking-wide">Имя *</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="Иван Петров"
+                          className="w-full bg-white border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
+                          value={mf.name}
+                          onChange={(e) => setMf({ ...mf, name: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-body font-medium text-bark/70 mb-1 uppercase tracking-wide">Телефон *</label>
+                        <input
+                          type="tel"
+                          placeholder="+7 (___) ___-__-__"
+                          className="w-full bg-white border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
+                          value={mf.phone}
+                          onChange={(e) => setMf({ ...mf, phone: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-body font-medium text-bark/70 mb-1 uppercase tracking-wide">Email *</label>
+                        <input
+                          type="email"
+                          placeholder="ivan@mail.ru"
+                          className="w-full bg-white border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
+                          value={mf.email}
+                          onChange={(e) => setMf({ ...mf, email: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {modalStep === 2 && (
+                  <>
+                    <h3 className="font-display text-2xl font-semibold text-bark mb-1">Размеры теплицы</h3>
+                    <p className="text-foreground/60 font-body text-sm mb-6">Укажите желаемые габариты или оставьте пустым</p>
+                    <div className="space-y-3">
+                      {[
+                        { label: "Длина (м)", key: "length" as const, placeholder: "например, 6" },
+                        { label: "Ширина (м)", key: "width" as const, placeholder: "например, 3" },
+                        { label: "Высота (м)", key: "height" as const, placeholder: "например, 2.1" },
+                      ].map(({ label, key, placeholder }) => (
+                        <div key={key}>
+                          <label className="block text-xs font-body font-medium text-bark/70 mb-1 uppercase tracking-wide">{label}</label>
+                          <input
+                            type="text"
+                            placeholder={placeholder}
+                            className="w-full bg-white border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
+                            value={mf[key]}
+                            onChange={(e) => setMf({ ...mf, [key]: e.target.value })}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {modalStep === 3 && (
+                  <>
+                    <h3 className="font-display text-2xl font-semibold text-bark mb-1">Регион и установка</h3>
+                    <p className="text-foreground/60 font-body text-sm mb-6">Куда доставить и нужен ли монтаж?</p>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-body font-medium text-bark/70 mb-1 uppercase tracking-wide">Регион / город</label>
+                        <input
+                          type="text"
+                          placeholder="например, Москва"
+                          className="w-full bg-white border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
+                          value={mf.region}
+                          onChange={(e) => setMf({ ...mf, region: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-body font-medium text-bark/70 mb-2 uppercase tracking-wide">Установка</label>
+                        <div className="grid grid-cols-2 gap-3">
+                          {INSTALL_OPTIONS.map((opt) => (
+                            <button
+                              type="button"
+                              key={opt}
+                              onClick={() => setMf({ ...mf, install: opt })}
+                              className={`py-3 px-4 rounded-xl border text-sm font-body transition-colors ${
+                                mf.install === opt
+                                  ? "border-moss bg-moss/10 text-moss font-medium"
+                                  : "border-sand bg-white text-foreground/65 hover:border-sage"
+                              }`}
+                            >
+                              {opt}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {modalStep === 4 && (
+                  <>
+                    <h3 className="font-display text-2xl font-semibold text-bark mb-1">Бюджет</h3>
+                    <p className="text-foreground/60 font-body text-sm mb-6">Выберите удобный диапазон или отметьте готовность к предложению</p>
+                    <div className="space-y-2">
+                      {BUDGET_OPTIONS.map((opt) => (
+                        <button
+                          type="button"
+                          key={opt}
+                          onClick={() => setMf({ ...mf, budget: opt })}
+                          className={`w-full py-3 px-5 rounded-xl border text-sm font-body text-left transition-colors flex items-center justify-between ${
+                            mf.budget === opt
+                              ? "border-moss bg-moss/10 text-moss font-medium"
+                              : "border-sand bg-white text-foreground/65 hover:border-sage"
+                          }`}
+                        >
+                          {opt}
+                          {mf.budget === opt && <Icon name="Check" size={16} className="text-moss" fallback="Check" />}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {/* Navigation */}
+                <div className="flex gap-3 mt-8">
+                  {modalStep > 1 && (
+                    <button
+                      onClick={() => setModalStep(modalStep - 1)}
+                      className="flex-1 border border-sand text-foreground/65 py-3 rounded-md font-body text-sm hover:border-moss transition-colors"
+                    >
+                      Назад
+                    </button>
+                  )}
+                  <button
+                    onClick={() => {
+                      if (modalStep < 4) {
+                        setModalStep(modalStep + 1);
+                      } else {
+                        setModalDone(true);
+                      }
+                    }}
+                    className="flex-1 bg-moss text-cream py-3 rounded-md font-body font-medium hover:bg-leaf transition-colors text-sm"
                   >
-                    <option value="">Выберите модель...</option>
-                    <option>«Дачница» 3 × 4 м</option>
-                    <option>«Усадьба» 3 × 6 м</option>
-                    <option>«Фермер» 4 × 8 м</option>
-                    <option>Нестандартный размер</option>
-                  </select>
+                    {modalStep < 4 ? "Готово →" : "Отправить заявку"}
+                  </button>
                 </div>
-                <div>
-                  <label className="block text-xs font-body font-medium text-bark/70 mb-2 uppercase tracking-wide">
-                    Что для вас важно?{" "}
-                    <span className="normal-case text-foreground/40">(выберите несколько)</span>
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {PRIORITIES.map((p) => (
-                      <button
-                        type="button"
-                        key={p}
-                        onClick={() => togglePriority(p)}
-                        className={`text-xs font-body px-3 py-1.5 rounded-full border transition-colors ${
-                          form.priorities.includes(p)
-                            ? "bg-moss text-cream border-moss"
-                            : "bg-cream text-foreground/65 border-sand hover:border-sage"
-                        }`}
-                      >
-                        {p}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-moss text-cream py-3 rounded-md font-body font-medium hover:bg-leaf transition-colors mt-2"
-                >
-                  Отправить заявку
-                </button>
-                <p className="text-center text-xs text-foreground/40 font-body">
+                <p className="text-center text-xs text-foreground/35 font-body mt-3">
                   Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
                 </p>
-              </form>
+              </div>
             )}
           </div>
         </div>
-      </section>
+      )}
 
       {/* FOOTER */}
       <footer className="bg-bark text-cream/70 py-10">
