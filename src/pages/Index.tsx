@@ -350,9 +350,7 @@ export default function Index() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-14">
             <span className="text-moss text-sm tracking-widest uppercase font-body">Каталог</span>
-            <h2 className="font-display text-4xl md:text-5xl font-light mt-3 text-bark">
-              Модели теплиц
-            </h2>
+            <h2 className="font-display text-4xl md:text-5xl font-light mt-3 text-bark">Популярные модели теплиц</h2>
             <p className="text-foreground/60 mt-3 font-body">
               Стандартные размеры в наличии. Нестандартные — под заказ.
             </p>
