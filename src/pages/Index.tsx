@@ -18,7 +18,7 @@ const CATEGORIES = [
   {
     id: "arch",
     label: "Арочные",
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/5df3b6b7-89c0-402b-81b8-1e5027074506.jpg",
+    img: "https://cdn.poehali.dev/files/7e246f51-79ee-440a-a313-34561984b6b5.jpg",
     desc: "Классическая форма дуги обеспечивает хорошее снегосбрасывание и оптимальное освещение. Самый популярный тип теплицы.",
     models: [
       { name: "Боярская 2.5м", size: "2.5 × 4–12 м, высота 2.1 м", price: "от 17 590 ₽", features: ["Труба 20×20 мм", "2 двери + 2 форточки", "Снег до 227 кг/м²"], popular: false },
@@ -30,7 +30,7 @@ const CATEGORIES = [
   {
     id: "straight",
     label: "Прямостенные",
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/2f85b504-b276-4324-8d6e-b5a77154baf2.jpg",
+    img: "https://cdn.poehali.dev/files/7438642f-2df7-40cd-921c-36db8e446242.jpg",
     desc: "Вертикальные стены дают максимум пространства у боковых грядок. Удобнее работать у краёв, легче подвешивать шпалеры.",
     models: [
       { name: "Царская Люкс 2.5м", size: "2.5 × 4–12 м, высота 2.1 м", price: "от 27 990 ₽", features: ["Труба 40×20 мм", "Прямые стены", "Гарантия 15 лет"], popular: false },
@@ -41,7 +41,7 @@ const CATEGORIES = [
   {
     id: "drop",
     label: "Каплевидные",
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/8a861dff-3446-4854-bc7c-416e63db16e3.jpg",
+    img: "https://cdn.poehali.dev/files/6fa4f067-454e-455f-9e1c-5ec549f7afcb.jpg",
     desc: "Заострённый верх в форме капли — снег не задерживается вовсе. Отличная вентиляция и эстетичный вид на участке.",
     models: [
       { name: "Боярская Капля 3м", size: "3 × 4–12 м, высота 2.1 м", price: "от 20 990 ₽", features: ["Снег сходит сам", "Труба 20×20 мм", "Гарантия 15 лет"], popular: false },
@@ -51,7 +51,7 @@ const CATEGORIES = [
   {
     id: "gable",
     label: "Двускатные",
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/67e62ce0-54c0-47b3-a873-68d97b019f70.jpg",
+    img: "https://cdn.poehali.dev/files/92c591ea-f4f7-4b68-99b8-e30cd38ad2c5.jpg",
     desc: "Двускатная крыша как у классического домика. Равномерный прогрев, хорошее освещение, снег легко сходит с двух сторон.",
     models: [
       { name: "Домик Люкс 3м", size: "3 × 4–12 м, высота 2.4 м", price: "от 32 990 ₽", features: ["Двускатная крыша", "Труба 40×20 мм", "Равномерный прогрев"], popular: true },
@@ -61,7 +61,7 @@ const CATEGORIES = [
   {
     id: "mittlider",
     label: "По Миттлайдеру",
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/3d12755a-2682-4b5c-82e3-b4f1004d6764.jpg",
+    img: "https://cdn.poehali.dev/files/f26033dd-47d8-4568-8a55-b01ad0cb49c9.jpg",
     desc: "Особая система вентиляции в коньке крыши. Идеальный микроклимат, равномерный прогрев воздуха — урожай на 20–30% выше.",
     models: [
       { name: "Миттлайдер Люкс 3.5м", size: "3.5 × 4–12 м, высота 2.4 м", price: "от 49 990 ₽", features: ["Вентиляция в коньке", "Труба 40×20 мм", "Идеальный климат"], popular: false },
