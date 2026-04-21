@@ -207,8 +207,24 @@ export default function Index() {
     budget: "",
   });
 
-  const openModal = () => { setModalOpen(true); setModalStep(1); setModalDone(false); };
+  const [modalError, setModalError] = useState("");
+
+  const openModal = () => { setModalOpen(true); setModalStep(1); setModalDone(false); setModalError(""); };
   const closeModal = () => setModalOpen(false);
+
+  const handleModalNext = () => {
+    setModalError("");
+    if (modalStep === 1) {
+      if (!mf.name.trim()) { setModalError("Пожалуйста, введите имя"); return; }
+      if (!mf.phone.trim()) { setModalError("Пожалуйста, введите телефон"); return; }
+      if (!mf.email.trim()) { setModalError("Пожалуйста, введите email"); return; }
+    }
+    if (modalStep < 4) {
+      setModalStep(modalStep + 1);
+    } else {
+      setModalDone(true);
+    }
+  };
 
   const togglePriority = (p: string) => {
     setForm((f) => ({
@@ -530,8 +546,7 @@ export default function Index() {
 
       {/* CONTACTS / FORM */}
       <section id="contacts" className="py-24 bg-cream">
-        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-start">
-          {/* Left: contacts */}
+        <div className="max-w-4xl mx-auto px-4">
           <div>
             <span className="text-moss text-sm tracking-widest uppercase font-body">Контакты</span>
             <h2 className="font-display text-4xl md:text-5xl font-light mt-3 mb-5 text-bark">
@@ -591,92 +606,6 @@ export default function Index() {
                 ))}
               </ul>
             </div>
-          </div>
-
-          {/* Right: simple quick form */}
-          <div
-            className="rounded-2xl border border-sand p-8"
-            style={{ backgroundColor: "hsl(42,20%,93%)" }}
-          >
-            {submitted ? (
-              <div className="text-center py-12">
-                <div className="w-16 h-16 bg-moss/15 rounded-full flex items-center justify-center mx-auto mb-5">
-                  <Icon name="CheckCircle" size={32} className="text-moss" fallback="CheckCircle" />
-                </div>
-                <h3 className="font-display text-2xl font-semibold text-bark mb-3">Заявка принята!</h3>
-                <p className="text-foreground/65 font-body">
-                  Мы перезвоним вам в течение часа в рабочее время.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <h3 className="font-display text-2xl font-semibold text-bark mb-1">Быстрая заявка</h3>
-                <p className="text-foreground/55 text-sm font-body mb-4">Оставьте контакты — перезвоним и подберём теплицу</p>
-                <div>
-                  <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">Имя *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Иван Петров"
-                    className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">Телефон *</label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+7 (___) ___-__-__"
-                    className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-body font-medium text-bark/70 mb-1.5 uppercase tracking-wide">Email</label>
-                  <input
-                    type="email"
-                    placeholder="ivan@mail.ru"
-                    className="w-full bg-cream border border-sand rounded-md px-4 py-2.5 text-sm font-body text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-moss transition-colors"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-body font-medium text-bark/70 mb-2 uppercase tracking-wide">
-                    Что важно?{" "}
-                    <span className="normal-case text-foreground/40">(несколько)</span>
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {PRIORITIES.map((p) => (
-                      <button
-                        type="button"
-                        key={p}
-                        onClick={() => togglePriority(p)}
-                        className={`text-xs font-body px-3 py-1.5 rounded-full border transition-colors ${
-                          form.priorities.includes(p)
-                            ? "bg-moss text-cream border-moss"
-                            : "bg-cream text-foreground/65 border-sand hover:border-sage"
-                        }`}
-                      >
-                        {p}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-moss text-cream py-3 rounded-md font-body font-medium hover:bg-leaf transition-colors"
-                >
-                  Отправить заявку
-                </button>
-                <p className="text-center text-xs text-foreground/40 font-body">
-                  Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
-                </p>
-              </form>
-            )}
           </div>
         </div>
       </section>
@@ -892,23 +821,22 @@ export default function Index() {
                 )}
 
                 {/* Navigation */}
-                <div className="flex gap-3 mt-8">
+                {modalError && (
+                  <p className="mt-4 text-sm font-body text-red-500 bg-red-50 border border-red-200 rounded-md px-4 py-2">
+                    {modalError}
+                  </p>
+                )}
+                <div className="flex gap-3 mt-4">
                   {modalStep > 1 && (
                     <button
-                      onClick={() => setModalStep(modalStep - 1)}
+                      onClick={() => { setModalStep(modalStep - 1); setModalError(""); }}
                       className="flex-1 border border-sand text-foreground/65 py-3 rounded-md font-body text-sm hover:border-moss transition-colors"
                     >
                       Назад
                     </button>
                   )}
                   <button
-                    onClick={() => {
-                      if (modalStep < 4) {
-                        setModalStep(modalStep + 1);
-                      } else {
-                        setModalDone(true);
-                      }
-                    }}
+                    onClick={handleModalNext}
                     className="flex-1 bg-moss text-cream py-3 rounded-md font-body font-medium hover:bg-leaf transition-colors text-sm"
                   >
                     {modalStep < 4 ? "Готово →" : "Отправить заявку"}
