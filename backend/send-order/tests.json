@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "OPTIONS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Send order",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Тест Тестов",
+        "phone": "+7 (999) 000-00-00",
+        "email": "test@test.ru",
+        "length": "6",
+        "width": "3",
+        "height": "2.1",
+        "region": "Москва",
+        "install": "Силами компании",
+        "budget": "20 000 – 40 000 ₽"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
