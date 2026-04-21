@@ -227,15 +227,15 @@ export default function Index() {
           </div>
           <div className="hidden md:flex gap-4 justify-end">
             <div className="bg-cream/10 backdrop-blur-sm border border-cream/20 rounded-xl p-6 max-w-xs">
-              <p className="font-display text-5xl text-cream font-semibold">12+</p>
-              <p className="text-cream/70 mt-1 font-body text-sm">лет на рынке</p>
-              <div className="mt-4 pt-4 border-t border-cream/20">
-                <p className="font-display text-5xl text-cream font-semibold">2 400+</p>
-                <p className="text-cream/70 mt-1 font-body text-sm">довольных клиентов</p>
-              </div>
+              <p className="font-display text-5xl text-cream font-semibold">2 400+</p>
+              <p className="text-cream/70 mt-1 font-body text-sm">довольных клиентов</p>
               <div className="mt-4 pt-4 border-t border-cream/20">
                 <p className="font-display text-5xl text-cream font-semibold">1 день</p>
                 <p className="text-cream/70 mt-1 font-body text-sm">монтаж под ключ</p>
+              </div>
+              <div className="mt-4 pt-4 border-t border-cream/20">
+                <p className="font-display text-5xl text-cream font-semibold">15 лет</p>
+                <p className="text-cream/70 mt-1 font-body text-sm">гарантия на теплицы</p>
               </div>
             </div>
           </div>
@@ -258,7 +258,7 @@ export default function Index() {
               климат региона, задачи и бюджет.
             </p>
             <div className="flex flex-wrap gap-6">
-              {[["12+", "лет опыта"], ["2 400+", "проектов"], ["48", "регионов"], ["100%", "гарантия"]].map(([val, lbl]) => (
+              {[["2 400+", "проектов"], ["48", "регионов"], ["15 лет", "гарантия"], ["100%", "качество"]].map(([val, lbl]) => (
                 <div key={lbl} className="text-center">
                   <p className="font-display text-3xl font-semibold text-moss">{val}</p>
                   <p className="text-sm text-foreground/60 font-body mt-0.5">{lbl}</p>
