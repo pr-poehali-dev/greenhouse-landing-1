@@ -72,7 +72,7 @@ const CATEGORIES = [
   {
     id: "lean",
     label: "Пристенные",
-    img: "https://cdn.poehali.dev/projects/ff76d473-8663-4c8b-bc4b-fb4239d02e4c/files/93c544e3-8d27-4857-8da8-abd595becc69.jpg",
+    img: "https://cdn.poehali.dev/files/7ca5a1f1-f097-439d-b11e-d950d2b571eb.jpg",
     desc: "Крепятся к стене дома или забора. Экономят место на участке, используют тепло дома — идеальны для небольших участков.",
     models: [
       { name: "Пристенная Люкс 2.5м", size: "2.5 × 2–8 м, высота 2.5 м", price: "от 22 990 ₽", features: ["Крепление к стене", "Труба 40×20 мм", "Экономия места"], popular: false },
