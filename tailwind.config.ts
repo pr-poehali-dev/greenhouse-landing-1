@@ -56,7 +56,10 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				earth: 'hsl(var(--earth))',
+				terra: 'hsl(var(--terra))',
+			stone: 'hsl(var(--stone))',
+			parchment: 'hsl(var(--parchment))',
+			earth: 'hsl(var(--earth))',
 				moss: 'hsl(var(--moss))',
 				sage: 'hsl(var(--sage))',
 				cream: 'hsl(var(--cream))',

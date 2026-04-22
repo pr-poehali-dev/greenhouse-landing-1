@@ -4,91 +4,161 @@
 
 @layer base {
   :root {
-    --background: 42 25% 96%;
-    --foreground: 30 20% 18%;
-
-    --card: 42 20% 98%;
-    --card-foreground: 30 20% 18%;
-
-    --popover: 42 20% 98%;
-    --popover-foreground: 30 20% 18%;
-
-    --primary: 92 28% 32%;
-    --primary-foreground: 42 25% 96%;
-
-    --secondary: 38 30% 88%;
-    --secondary-foreground: 30 20% 18%;
-
-    --muted: 38 20% 90%;
-    --muted-foreground: 30 15% 42%;
-
-    --accent: 75 35% 45%;
-    --accent-foreground: 42 25% 96%;
-
+    /* shadcn tokens */
+    --background: 42 30% 97%;
+    --foreground: 25 20% 15%;
+    --card: 42 30% 97%;
+    --card-foreground: 25 20% 15%;
+    --popover: 42 30% 97%;
+    --popover-foreground: 25 20% 15%;
+    --primary: 138 32% 28%;
+    --primary-foreground: 42 30% 97%;
+    --secondary: 42 20% 92%;
+    --secondary-foreground: 25 20% 15%;
+    --muted: 42 20% 92%;
+    --muted-foreground: 25 15% 48%;
+    --accent: 138 32% 28%;
+    --accent-foreground: 42 30% 97%;
     --destructive: 0 72% 51%;
-    --destructive-foreground: 42 25% 96%;
+    --destructive-foreground: 42 30% 97%;
+    --border: 35 18% 85%;
+    --input: 35 18% 85%;
+    --ring: 138 32% 28%;
+    --radius: 2px;
 
-    --border: 38 20% 82%;
-    --input: 38 20% 82%;
-    --ring: 92 28% 32%;
-
-    --radius: 0.375rem;
-
-    /* Custom nature palette */
-    --earth: 28 35% 35%;
-    --moss: 92 28% 32%;
-    --sage: 100 20% 55%;
-    --cream: 42 25% 96%;
-    --bark: 20 30% 25%;
-    --sand: 38 40% 78%;
-    --leaf: 75 35% 45%;
+    /* Design tokens */
+    --cream: 42 30% 97%;
+    --parchment: 40 25% 93%;
+    --sand: 38 22% 86%;
+    --bark: 25 20% 15%;
+    --earth: 24 18% 32%;
+    --stone: 30 10% 55%;
+    --moss: 138 32% 28%;
+    --sage: 138 24% 44%;
+    --leaf: 138 38% 60%;
+    --terra: 14 52% 50%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border box-border;
   }
-
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--cream));
+    color: hsl(var(--bark));
     font-family: "Golos Text", sans-serif;
-    background-color: hsl(42, 25%, 96%);
+    font-size: 16px;
   }
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: hsl(var(--moss));
+    color: hsl(var(--cream));
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--parchment));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--sand));
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--sage));
   }
 }
 
 @layer utilities {
+  /* Backgrounds */
+  .bg-cream {
+    background-color: hsl(var(--cream));
+  }
+  .bg-parchment {
+    background-color: hsl(var(--parchment));
+  }
+  .bg-sand-light {
+    background-color: hsl(var(--sand));
+  }
+  .bg-moss {
+    background-color: hsl(var(--moss));
+  }
+  .bg-bark {
+    background-color: hsl(var(--bark));
+  }
+
+  /* Text */
+  .text-bark {
+    color: hsl(var(--bark));
+  }
+  .text-earth {
+    color: hsl(var(--earth));
+  }
+  .text-stone {
+    color: hsl(var(--stone));
+  }
+  .text-moss {
+    color: hsl(var(--moss));
+  }
+  .text-sage {
+    color: hsl(var(--sage));
+  }
+  .text-leaf {
+    color: hsl(var(--leaf));
+  }
+  .text-terra {
+    color: hsl(var(--terra));
+  }
+  .text-cream {
+    color: hsl(var(--cream));
+  }
+
+  /* Borders */
+  .border-sand {
+    border-color: hsl(var(--sand));
+  }
+  .border-moss {
+    border-color: hsl(var(--moss));
+  }
+
+  /* Font display shorthand */
   .font-display {
     font-family: "Cormorant Garamond", serif;
   }
-  .font-body {
+
+  /* Label / eyebrow */
+  .label {
     font-family: "Golos Text", sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: hsl(var(--sage));
   }
 
-  .texture-overlay {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  /* Divider line */
+  .divider {
+    width: 2.5rem;
+    height: 1px;
+    background-color: hsl(var(--moss));
+    display: block;
   }
 
-  .section-divider {
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 40'%3E%3Cpath fill='%23f5f0e8' d='M0,20 C360,40 1080,0 1440,20 L1440,40 L0,40 Z'/%3E%3C/svg%3E")
-      no-repeat center bottom;
-  }
-
-  .animate-fade-up {
-    animation: fadeUp 0.7s ease both;
-  }
-
-  @keyframes fadeUp {
+  /* Animations */
+  @keyframes fadeSlideUp {
     from {
       opacity: 0;
       transform: translateY(24px);
@@ -97,5 +167,56 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes marqueeX {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .anim-up {
+    animation: fadeSlideUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .anim-in {
+    animation: fadeIn 0.55s ease both;
+  }
+  .anim-marq {
+    animation: marqueeX 32s linear infinite;
+  }
+  .anim-float {
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .delay-1 {
+    animation-delay: 0.1s;
+  }
+  .delay-2 {
+    animation-delay: 0.2s;
+  }
+  .delay-3 {
+    animation-delay: 0.3s;
+  }
+  .delay-4 {
+    animation-delay: 0.45s;
   }
 }
