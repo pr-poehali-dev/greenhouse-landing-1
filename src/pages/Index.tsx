@@ -605,7 +605,11 @@ export default function Index() {
                     <Icon name={c.icon} size={18} className="text-moss" fallback="Phone" />
                   </div>
                   <div>
-                    <p className="font-body font-medium text-bark">{c.text}</p>
+                    {c.icon === "Phone" ? (
+                      <a href="tel:+79065170682" className="font-body font-medium text-bark hover:text-moss transition-colors">{c.text}</a>
+                    ) : (
+                      <p className="font-body font-medium text-bark">{c.text}</p>
+                    )}
                     <p className="text-foreground/55 text-xs font-body">{c.sub}</p>
                   </div>
                 </div>
