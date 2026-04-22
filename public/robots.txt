@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://solnechniy-kontur.poehali.dev/sitemap.xml
