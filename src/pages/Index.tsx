@@ -597,7 +597,7 @@ export default function Index() {
             </p>
             <div className="space-y-4 mb-10">
               {[
-                { icon: "Phone", text: "+7 (800) 000-00-00", sub: "Бесплатно по России" },
+                { icon: "Phone", text: "+7 (906) 517-06-82", sub: "Бесплатно по России" },
                 { icon: "MapPin", text: "Москва и Московская область", sub: "Выезжаем к вам" },
               ].map((c) => (
                 <div key={c.text} className="flex items-start gap-4">
