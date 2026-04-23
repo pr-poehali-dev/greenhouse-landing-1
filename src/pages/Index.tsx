@@ -439,6 +439,76 @@ export default function Index() {
         </div>
       </section>
 
+      {/* ══ CONTACTS ═════════════════════════════════════ */}
+      <section id="contacts" className="py-28 bg-parchment">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-0 border border-sand rounded-sm overflow-hidden">
+            {/* Left */}
+            <div className="p-10 lg:p-14">
+              <span className="label mb-4 block">Контакты</span>
+              <h2 className="font-display text-bark mb-5 leading-tight"
+                style={{ fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 300 }}>
+                Оставьте заявку —<br />перезвоним за час
+              </h2>
+              <p className="text-stone text-sm font-body leading-relaxed mb-10 max-w-sm">
+                Подберём модель, рассчитаем стоимость, ответим на все вопросы. Бесплатно, без обязательств.
+              </p>
+
+              <div className="space-y-4 mb-10">
+                <a href="tel:+79065170682" className="flex items-center gap-4 group">
+                  <div className="w-10 h-10 rounded-sm bg-moss/10 group-hover:bg-moss flex items-center justify-center transition-colors">
+                    <Icon name="Phone" size={16} className="text-moss group-hover:text-cream transition-colors" fallback="Phone" />
+                  </div>
+                  <div>
+                    <p className="font-body font-semibold text-bark text-sm group-hover:text-moss transition-colors">+7 (906) 517-06-82</p>
+                    <p className="text-stone text-xs font-body">Бесплатно по России</p>
+                  </div>
+                </a>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-sm bg-moss/10 flex items-center justify-center">
+                    <Icon name="MapPin" size={16} className="text-moss" fallback="MapPin" />
+                  </div>
+                  <div>
+                    <p className="font-body font-semibold text-bark text-sm">Москва и Московская область</p>
+                    <p className="text-stone text-xs font-body">Выезжаем к вам</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button onClick={openModal}
+                  className="flex-1 bg-moss text-cream py-3.5 px-6 rounded-sm font-body text-sm hover:opacity-90 transition-opacity">
+                  Оставить заявку
+                </button>
+                <button onClick={openModal}
+                  className="flex-1 border border-sand text-stone py-3.5 px-6 rounded-sm font-body text-sm hover:border-moss hover:text-moss transition-all">
+                  Получить статьи
+                </button>
+              </div>
+            </div>
+
+            {/* Right — articles */}
+            <div className="p-10 lg:p-14 bg-cream border-t lg:border-t-0 lg:border-l border-sand">
+              <p className="text-stone text-xs font-body tracking-widest uppercase mb-8">3 авторские статьи в подарок</p>
+              <div className="space-y-0 divide-y divide-sand">
+                {ARTICLES.map((a, i) => (
+                  <div key={i} className="flex items-start gap-5 py-6">
+                    <span className="font-display text-4xl text-moss/20 leading-none flex-shrink-0"
+                      style={{ fontWeight: 300 }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <p className="text-bark text-sm font-body leading-snug mb-2">{a}</p>
+                      <span className="text-xs font-body text-moss">Читать →</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ══ PROCESS ══════════════════════════════════════ */}
       <section id="process" className="py-28 bg-bark text-cream">
         <div className="max-w-7xl mx-auto px-6">
@@ -558,76 +628,6 @@ export default function Index() {
                 )}
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══ CONTACTS ═════════════════════════════════════ */}
-      <section id="contacts" className="py-28 bg-parchment">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-0 border border-sand rounded-sm overflow-hidden">
-            {/* Left */}
-            <div className="p-10 lg:p-14">
-              <span className="label mb-4 block">Контакты</span>
-              <h2 className="font-display text-bark mb-5 leading-tight"
-                style={{ fontSize: "clamp(1.8rem,3.5vw,2.8rem)", fontWeight: 300 }}>
-                Оставьте заявку —<br />перезвоним за час
-              </h2>
-              <p className="text-stone text-sm font-body leading-relaxed mb-10 max-w-sm">
-                Подберём модель, рассчитаем стоимость, ответим на все вопросы. Бесплатно, без обязательств.
-              </p>
-
-              <div className="space-y-4 mb-10">
-                <a href="tel:+79065170682" className="flex items-center gap-4 group">
-                  <div className="w-10 h-10 rounded-sm bg-moss/10 group-hover:bg-moss flex items-center justify-center transition-colors">
-                    <Icon name="Phone" size={16} className="text-moss group-hover:text-cream transition-colors" fallback="Phone" />
-                  </div>
-                  <div>
-                    <p className="font-body font-semibold text-bark text-sm group-hover:text-moss transition-colors">+7 (906) 517-06-82</p>
-                    <p className="text-stone text-xs font-body">Бесплатно по России</p>
-                  </div>
-                </a>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-sm bg-moss/10 flex items-center justify-center">
-                    <Icon name="MapPin" size={16} className="text-moss" fallback="MapPin" />
-                  </div>
-                  <div>
-                    <p className="font-body font-semibold text-bark text-sm">Москва и Московская область</p>
-                    <p className="text-stone text-xs font-body">Выезжаем к вам</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button onClick={openModal}
-                  className="flex-1 bg-moss text-cream py-3.5 px-6 rounded-sm font-body text-sm hover:opacity-90 transition-opacity">
-                  Оставить заявку
-                </button>
-                <button onClick={openModal}
-                  className="flex-1 border border-sand text-stone py-3.5 px-6 rounded-sm font-body text-sm hover:border-moss hover:text-moss transition-all">
-                  Получить статьи
-                </button>
-              </div>
-            </div>
-
-            {/* Right — articles */}
-            <div className="p-10 lg:p-14 bg-cream border-t lg:border-t-0 lg:border-l border-sand">
-              <p className="text-stone text-xs font-body tracking-widest uppercase mb-8">3 авторские статьи в подарок</p>
-              <div className="space-y-0 divide-y divide-sand">
-                {ARTICLES.map((a, i) => (
-                  <div key={i} className="flex items-start gap-5 py-6">
-                    <span className="font-display text-4xl text-moss/20 leading-none flex-shrink-0"
-                      style={{ fontWeight: 300 }}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <p className="text-bark text-sm font-body leading-snug mb-2">{a}</p>
-                      <span className="text-xs font-body text-moss">Читать →</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
